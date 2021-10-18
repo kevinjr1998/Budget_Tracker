@@ -10,9 +10,11 @@ const config = {
   mode: "development",
   plugins: [
     new WebpackPwaManifest({
-      name: "Images App",
-      short_name: "Images App",
-      description: "An application for images",
+      fingerprints: false,
+      filename: "manifest.webmanifest",
+      name: "Budget Tracker",
+      short_name: "Budget Tracker",
+      description: "An application for tracking budgers",
       background_color: "#01579b",
       theme_color: "#ffffff",
       "theme-color": "#ffffff",
@@ -21,7 +23,7 @@ const config = {
         {
           src: path.resolve("public/assets/icons/icon-192x192.png"),
           sizes: [96, 128, 192, 256, 384, 512],
-          destination: path.join( "icons")
+          destination: path.join("icons")
         }
       ]
     })
