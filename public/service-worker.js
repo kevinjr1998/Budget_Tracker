@@ -3,48 +3,15 @@ const FILES_TO_CACHE = [
   "/index.html",
   "/assets/styles.css",
   "/dist/index.bundle.js",
-  "/dist/offlineDB.bundle.js",
   "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
   "https://cdn.jsdelivr.net/npm/chart.js@2.8.0",
   "/dist/manifest.webmanifest",
-  "/dist/icons/icon_512x512.png",
-  "/dist/icons/icon_384x384.png",
-  "/dist/icons/icon_256x256.png",
-  "/dist/icons/icon_192x192.png",
-  "/dist/icons/icon_128x128.png",
-  "/dist/icons/icon_96x96.png",
 ];
 
 const STATIC_CACHE = "static-cache-v1";
 const RUNTIME_CACHE = "runtime-cache";
 
-
-// clears runtime cache whenever connects online, 
-
-// self.addEventListener("online", (event) => {
-//   const currentCaches = [RUNTIME_CACHE];
-//   event.waitUntil(
-//     caches
-//       .keys()
-//       .then((cacheNames) => {
-//         // return array of cache names that are old to delete
-//         return cacheNames.filter(
-//           (cacheName) => !currentCaches.includes(cacheName)
-//         );
-//       })
-//       .then((cachesToDelete) => {
-//         return Promise.all(
-//           cachesToDelete.map((cacheToDelete) => {
-//             return caches.delete(cacheToDelete);
-//           })
-//         );
-//       })
-//       // .then(() => self.clients.claim())
-//       .then(() => console.log("runtime cache cleared"))
-//   );
-
-// });
-
+// caches all static assets 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
@@ -81,6 +48,7 @@ self.addEventListener("activate", (event) => {
 
 
 self.addEventListener("fetch", (event) => {
+  //doesnt cache api requests
   if (event.request.url.includes("/api/")) {
     event.respondWith(fetch(event.request));
     return;
