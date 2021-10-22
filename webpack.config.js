@@ -4,7 +4,6 @@ const path = require("path");
 const config = {
   entry: {
       index :"./public/assets/index.js",
-      offlineDB: "./public/assets/offlineDB.js"
   },
   output: {
     path: __dirname + "/public/dist",
